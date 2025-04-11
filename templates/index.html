@@ -1,21 +1,48 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Encrypt / Decrypt</title>
+    <title>AES Encrypt/Decrypt</title>
+    <style>
+        textarea {
+            width: 100%;
+            height: 100px;
+        }
+        button {
+            padding: 8px 12px;
+            margin-top: 10px;
+        }
+    </style>
 </head>
 <body>
-    <h1>🔐 AES Encrypt / Decrypt</h1>
+    <h1>AES Encryption & Decryption</h1>
+
     <form method="POST">
-        <textarea name="text" rows="6" cols="50" placeholder="Enter your text here">{{ input_text }}</textarea><br>
-        <label><input type="radio" name="mode" value="Encrypt" {% if mode=='Encrypt' %}checked{% endif %}> Encrypt</label>
-        <label><input type="radio" name="mode" value="Decrypt" {% if mode=='Decrypt' %}checked{% endif %}> Decrypt</label><br><br>
+        <label>Enter text:</label><br>
+        <textarea name="text" required>{{ input_text }}</textarea><br><br>
+
+        <label>Select Mode:</label><br>
+        <select name="mode">
+            <option value="Encrypt" {% if mode == 'Encrypt' %}selected{% endif %}>Encrypt</option>
+            <option value="Decrypt" {% if mode == 'Decrypt' %}selected{% endif %}>Decrypt</option>
+        </select><br><br>
+
         <button type="submit">Submit</button>
     </form>
 
     {% if result %}
         <h3>Result:</h3>
-        <p>{{ result }}</p>
+        <textarea id="resultText" readonly>{{ result }}</textarea><br>
+        <button onclick="copyToClipboard()">📋 Copy Result</button>
     {% endif %}
+
+    <script>
+        function copyToClipboard() {
+            const text = document.getElementById("resultText");
+            text.select();
+            document.execCommand("copy");
+            alert("✅ Text copied to clipboard!");
+        }
+    </script>
 </body>
 </html>
