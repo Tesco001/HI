@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Encrypt / Decrypt</title>
+</head>
+<body>
+    <h1>🔐 AES Encrypt / Decrypt</h1>
+    <form method="POST">
+        <textarea name="text" rows="6" cols="50" placeholder="Enter your text here">{{ input_text }}</textarea><br>
+        <label><input type="radio" name="mode" value="Encrypt" {% if mode=='Encrypt' %}checked{% endif %}> Encrypt</label>
+        <label><input type="radio" name="mode" value="Decrypt" {% if mode=='Decrypt' %}checked{% endif %}> Decrypt</label><br><br>
+        <button type="submit">Submit</button>
+    </form>
+
+    {% if result %}
+        <h3>Result:</h3>
+        <p>{{ result }}</p>
+    {% endif %}
+</body>
+</html>
